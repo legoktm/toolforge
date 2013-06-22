@@ -16,4 +16,5 @@ def connect(dbname):
                           read_default_file=os.path.expanduser("~/replica.my.cnf"),
                           charset=None,
                           use_unicode=False,
-    )
+                          )
+
