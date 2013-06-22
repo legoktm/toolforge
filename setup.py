@@ -10,4 +10,5 @@ setup(
     author_email='legoktm@gmail.com',
     description='Small library for common tasks on Wikimedia Labs',
     install_requires=['oursql'],
+    test_suite="tests",
 )
