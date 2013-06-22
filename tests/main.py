@@ -7,7 +7,7 @@ import wmflabs
 
 class Test(unittest.TestCase):
 
-    def checkType(self):
+    def testTypes(self):
         self.assertTrue(hasattr(wmflabs.db.connect, '__call__'))
         self.assertTrue(hasattr(wmflabs.grid.submit, '__call__'))
 
