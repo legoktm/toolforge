@@ -7,10 +7,13 @@ Authors:
 """
 
 import os
-import oursql
+import sys
 
 
 def connect(dbname):
+    if sys.version[0] == '3':
+        raise NotImplementedError
+    import oursql
     return oursql.connect(db=dbname + '_p',
                           host=dbname + ".labsdb",
                           read_default_file=os.path.expanduser("~/replica.my.cnf"),

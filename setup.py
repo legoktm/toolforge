@@ -1,4 +1,11 @@
 from setuptools import setup
+import sys
+
+if sys.version[0] == '2':
+    depends = ['oursql']
+else:
+    depends = []
+
 
 setup(
     name='wmflabs',
@@ -9,6 +16,6 @@ setup(
     author='Kunal Mehta',
     author_email='legoktm@gmail.com',
     description='Small library for common tasks on Wikimedia Labs',
-    install_requires=['oursql'],
+    install_requires=depends,
     test_suite="tests",
 )
