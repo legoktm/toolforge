@@ -9,7 +9,7 @@ else:
 
 setup(
     name='wmflabs',
-    version='1.0',
+    version='2.0',
     packages=['wmflabs'],
     url='https://github.com/legoktm/wmflabs-lib',
     license='Public domain',
