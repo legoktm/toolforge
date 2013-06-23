@@ -11,7 +11,7 @@ setup(
     name='wmflabs',
     version='2.0',
     packages=['wmflabs'],
-    url='https://github.com/legoktm/wmflabs-lib',
+    url='https://wikitech.wikimedia.org/wiki/User:Legoktm/wmflib',
     license='Public domain',
     author='Kunal Mehta',
     author_email='legoktm@gmail.com',
