@@ -10,7 +10,7 @@ import os
 import pipes
 import subprocess
 
-environ = os.environ
+environ = dict(os.environ)
 environ['PATH'] = '/bin:/usr/bin:/usr/local/bin'
 
 
