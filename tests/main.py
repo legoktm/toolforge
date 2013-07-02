@@ -10,6 +10,7 @@ class Test(unittest.TestCase):
     def testTypes(self):
         self.assertTrue(hasattr(wmflabs.db.connect, '__call__'))
         self.assertTrue(hasattr(wmflabs.grid.submit, '__call__'))
+        self.assertTrue(hasattr(wmflabs.grid.qstat, '__call__'))
 
     def testPy3k(self):
         if sys.version[0] == '3':
