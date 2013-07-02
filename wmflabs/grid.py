@@ -8,10 +8,13 @@ Authors:
 
 import os
 import pipes
+import re
 import subprocess
 
 environ = dict(os.environ)
 environ['PATH'] = '/bin:/usr/bin:/usr/local/bin'
+
+re_job = re.compile(' (?P<id>\d*?) (?P<prior>\d\.\d*?) (?P<name>.*?)\s*?(?P<user>.*?) (?P<state>.*?)\s*?(?P<date>\d\d/\d\d/\d\d\d\d \d\d:\d\d:\d\d) (?P<queue>.*?)\s*?')
 
 
 def submit(command, **kwargs):
@@ -29,3 +32,20 @@ def submit(command, **kwargs):
                                      env=environ,
                                      )
     return output.split(' ')[2]
+
+
+def qstat():
+    """
+    Returns a machine readable output of qstat
+    """
+    data = []
+    output = subprocess.check_output('qstat')
+    if not output:
+        # No jobs running
+        return data
+    lines = output.splitlines()[2:]
+    for line in lines:
+        match = re_job.search(line)
+        if match:
+            data.append(match.groupdict())
+    return data
