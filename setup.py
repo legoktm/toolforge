@@ -1,11 +1,9 @@
 from setuptools import setup
 import sys
 
+depends = ['requests']
 if sys.version[0] == '2':
-    depends = ['oursql']
-else:
-    depends = []
-
+    depends.append('oursql')
 
 setup(
     name='wmflabs',
