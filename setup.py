@@ -7,7 +7,7 @@ if sys.version[0] == '2':
 
 setup(
     name='wmflabs',
-    version='2.1',
+    version='2.2',
     packages=['wmflabs'],
     url='https://wikitech.wikimedia.org/wiki/User:Legoktm/wmflib',
     license='Public domain',

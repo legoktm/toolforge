@@ -17,6 +17,10 @@ def connect(dbname):
     if dbname.endswith('_p'):
         dbname = dbname[:-2]
     import oursql
+    if dbname == 'meta':
+        host = 'enwiki' + ".labsdb"
+    else:
+        host = dbname + ".labsdb"
     return oursql.connect(db=dbname + '_p',
                           host=dbname + ".labsdb",
                           read_default_file=os.path.expanduser("~/replica.my.cnf"),
