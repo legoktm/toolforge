@@ -22,7 +22,7 @@ def connect(dbname):
     else:
         host = dbname + ".labsdb"
     return oursql.connect(db=dbname + '_p',
-                          host=dbname + ".labsdb",
+                          host=host,
                           read_default_file=os.path.expanduser("~/replica.my.cnf"),
                           charset=None,
                           use_unicode=False,
