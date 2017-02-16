@@ -1,14 +1,13 @@
 language: python
 python:
-  - "3.2"
   - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
 # command to install dependencies
-install: "python setup.py build"
+install: "pip install tox"
 # command to run tests
-script: python setup.py test
+script: tox
 notifications:
   email: false
   irc: 
