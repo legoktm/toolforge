@@ -1,19 +1,14 @@
 from setuptools import setup
-import sys
-
-depends = ['requests']
-if sys.version[0] == '2':
-    depends.append('oursql')
 
 setup(
     name='wmflabs',
-    version='2.2.1',
+    version='3.0.0',
     packages=['wmflabs'],
     url='https://wikitech.wikimedia.org/wiki/User:Legoktm/wmflib',
-    license='Public domain',
+    license='GPL-3.0+',
     author='Kunal Mehta',
-    author_email='legoktm@gmail.com',
+    author_email='legoktm@member.fsf.org',
     description='Small library for common tasks on Wikimedia Labs',
-    install_requires=depends,
+    install_requires=['requests', 'pymysql'],
     test_suite="tests",
 )
