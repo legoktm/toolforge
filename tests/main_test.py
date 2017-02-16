@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import requests
 import unittest
 import wmflabs
 
@@ -20,6 +21,16 @@ class MainTest(unittest.TestCase):
         ]
         for domain, dbname in values:
             self.assertEqual(wmflabs.dbname(domain), dbname)
+
+    def test_set_user_agent(self):
+        orig = requests.utils.default_user_agent
+        wmflabs.set_user_agent('mycooltool')
+        self.assertEqual(
+            requests.get('https://httpbin.org/user-agent').json(),
+            {'user-agent': 'mycooltool (https://tools.wmflabs.org/mycooltool; '
+             'tools.mycooltool@tools.wmflabs.org) python-requests/2.13.0'}
+        )
+        requests.utils.default_user_agent = orig
 
 
 if __name__ == "__main__":

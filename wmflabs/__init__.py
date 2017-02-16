@@ -75,3 +75,22 @@ def _fetch_sitematrix():
     r = requests.get('https://meta.wikimedia.org/w/api.php', params=params, headers=headers)
     r.raise_for_status()
     return r.json()
+
+
+def set_user_agent(tool, url=None, email=None):
+    """
+    Set the default requests user-agent to a better
+    one in accordance with
+    <https://meta.wikimedia.org/wiki/User-Agent_policy>
+    :param tool: Tool Labs tool name
+    :param url: Optional URL
+    :param email: Optional email
+    """
+    if url is None:
+        url = 'https://tools.wmflabs.org/{}'.format(tool)
+    if email is None:
+        email = 'tools.{}@tools.wmflabs.org'.format(tool)
+
+    requests_ua = requests.utils.default_user_agent()
+    ua = '{} ({}; {}) {}'.format(tool, url, email, requests_ua)
+    requests.utils.default_user_agent = lambda: ua
