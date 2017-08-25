@@ -24,6 +24,7 @@ class MainTest(unittest.TestCase):
 
     def test_set_user_agent(self):
         orig = requests.utils.default_user_agent
+        requests.utils.default_user_agent = lambda: 'python-requests/2.13.0'
         wmflabs.set_user_agent('mycooltool')
         self.assertEqual(
             requests.get('https://httpbin.org/user-agent').json(),
