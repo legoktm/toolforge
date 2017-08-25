@@ -94,3 +94,15 @@ def set_user_agent(tool, url=None, email=None):
     requests_ua = requests.utils.default_user_agent()
     ua = '{} ({}; {}) {}'.format(tool, url, email, requests_ua)
     requests.utils.default_user_agent = lambda: ua
+
+
+def redirect_to_https():
+    """
+    Redirect all HTTP requests to HTTPS for flask apps
+
+    Usage: app.before_request(wmflabs.redirect_to_https)
+    """
+    from flask import request, redirect
+    if request.headers.get('X-Forwarded-Proto') == 'http':
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, 302)
