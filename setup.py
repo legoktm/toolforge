@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='wmflabs',
-    version='3.1.0',
+    version='3.2.0',
     packages=['wmflabs'],
     url='https://wikitech.wikimedia.org/wiki/User:Legoktm/wmflib',
     license='GPL-3.0+',
