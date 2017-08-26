@@ -16,93 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import functools
-import os
-import pymysql
-import requests
+import toolforge
 
 
-def connect(dbname, **kwargs):
-    """
-    Get a database connection for the
-    specified wiki
-    :param dbname: Database name
-    :param kwargs: For pymysql.connect
-    :return: pymysql connection
-    """
-    if dbname.endswith('_p'):
-        dbname = dbname[:-2]
-    if dbname == 'meta':
-        host = 'enwiki.labsdb'
-    else:
-        host = dbname + ".labsdb"
-    return pymysql.connect(
-        database=dbname + '_p',
-        host=host,
-        read_default_file=os.path.expanduser("~/replica.my.cnf"),
-        charset='utf8mb4',
-        **kwargs
-    )
-
-
-def dbname(domain):
-    """
-    Convert a domain/URL into its database name
-    """
-    # First, lets normalize the name.
-    if domain.startswith(('http://', 'https://')):
-        domain = domain.replace('http://', '', 1).replace('https://', '', 1)
-    if '/' in domain:
-        domain = domain.split('/', 1)[0]
-
-    domain = 'https://' + domain
-    data = _fetch_sitematrix()['sitematrix']
-    for num in data:
-        if num.isdigit():
-            for site in data[num]['site']:
-                if site['url'] == domain:
-                    return site['dbname']
-        elif num == 'specials':
-            for special in data[num]:
-                if special['url'] == domain:
-                    return special['dbname']
-
-
-@functools.lru_cache()
-def _fetch_sitematrix():
-    params = {'action': 'sitematrix', 'format': 'json'}
-    headers = {'User-agent': 'https://wikitech.wikimedia.org/wiki/User:Legoktm/wmflib'}
-    r = requests.get('https://meta.wikimedia.org/w/api.php', params=params, headers=headers)
-    r.raise_for_status()
-    return r.json()
-
-
-def set_user_agent(tool, url=None, email=None):
-    """
-    Set the default requests user-agent to a better
-    one in accordance with
-    <https://meta.wikimedia.org/wiki/User-Agent_policy>
-    :param tool: Tool Labs tool name
-    :param url: Optional URL
-    :param email: Optional email
-    """
-    if url is None:
-        url = 'https://tools.wmflabs.org/{}'.format(tool)
-    if email is None:
-        email = 'tools.{}@tools.wmflabs.org'.format(tool)
-
-    requests_ua = requests.utils.default_user_agent()
-    ua = '{} ({}; {}) {}'.format(tool, url, email, requests_ua)
-    requests.utils.default_user_agent = lambda: ua
-
-
-def redirect_to_https():
-    """
-    Redirect all HTTP requests to HTTPS for flask apps
-
-    Usage: app.before_request(wmflabs.redirect_to_https)
-    """
-    from flask import request, redirect
-    if request.headers.get('X-Forwarded-Proto') == 'http':
-        url = request.url.replace('http://', 'https://', 1)
-        return redirect(url, 302)
+connect = toolforge.connect
+dbname = toolforge.dbname
+set_user_agent = toolforge.set_user_agent
+redirect_to_https = toolforge.redirect_to_https
