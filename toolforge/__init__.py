@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Small library for common tasks on Wikimedia Labs
+Small library for common tasks on Wikimedia Toolforge
 Copyright (C) 2013, 2017 Kunal Mehta <legoktm@member.fsf.org>
 
 This program is free software: you can redistribute it and/or modify
@@ -82,7 +82,7 @@ def set_user_agent(tool, url=None, email=None):
     Set the default requests user-agent to a better
     one in accordance with
     <https://meta.wikimedia.org/wiki/User-Agent_policy>
-    :param tool: Tool Labs tool name
+    :param tool: Toolforge tool name
     :param url: Optional URL
     :param email: Optional email
     """
@@ -100,7 +100,7 @@ def redirect_to_https():
     """
     Redirect all HTTP requests to HTTPS for flask apps
 
-    Usage: app.before_request(wmflabs.redirect_to_https)
+    Usage: app.before_request(toolforge.redirect_to_https)
     """
     from flask import request, redirect
     if request.headers.get('X-Forwarded-Proto') == 'http':

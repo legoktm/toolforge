@@ -2,14 +2,14 @@
 
 import requests
 import unittest
-import wmflabs
+import toolforge
 
 
 class MainTest(unittest.TestCase):
 
     def test_callable(self):
-        self.assertTrue(hasattr(wmflabs.connect, '__call__'))
-        self.assertTrue(hasattr(wmflabs.dbname, '__call__'))
+        self.assertTrue(hasattr(toolforge.connect, '__call__'))
+        self.assertTrue(hasattr(toolforge.dbname, '__call__'))
 
     def test_dbname(self):
         values = [
@@ -20,12 +20,12 @@ class MainTest(unittest.TestCase):
             ('en.wikisource.org/wiki/Article', 'enwikisource')
         ]
         for domain, dbname in values:
-            self.assertEqual(wmflabs.dbname(domain), dbname)
+            self.assertEqual(toolforge.dbname(domain), dbname)
 
     def test_set_user_agent(self):
         orig = requests.utils.default_user_agent
         requests.utils.default_user_agent = lambda: 'python-requests/2.13.0'
-        wmflabs.set_user_agent('mycooltool')
+        toolforge.set_user_agent('mycooltool')
         self.assertEqual(
             requests.get('https://httpbin.org/user-agent').json(),
             {'user-agent': 'mycooltool (https://tools.wmflabs.org/mycooltool; '
