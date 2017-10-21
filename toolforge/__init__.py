@@ -22,27 +22,43 @@ import pymysql
 import requests
 
 
-def connect(dbname, **kwargs):
+def connect(dbname, cluster='web', **kwargs):
     """
     Get a database connection for the
     specified wiki
     :param dbname: Database name
+    :param cluster: Database cluster (analytics or web)
     :param kwargs: For pymysql.connect
     :return: pymysql connection
     """
+    assert cluster in ['analytics', 'labsdb', 'web']
+
+    if cluster == 'labsdb':
+        domain = 'labsdb'
+    else:
+        domain = '{}.db.svc.eqiad.wmflabs'.format(cluster)
+
     if dbname.endswith('_p'):
         dbname = dbname[:-2]
+
     if dbname == 'meta':
-        host = 'enwiki.labsdb'
+        host = 's7.{}'.format(domain)
     else:
-        host = dbname + ".labsdb"
-    return pymysql.connect(
+        host = '{}.{}'.format(dbname, domain)
+    host = kwargs.pop('host', host)
+
+    return _connect(
         database=dbname + '_p',
         host=host,
         read_default_file=os.path.expanduser("~/replica.my.cnf"),
         charset='utf8mb4',
         **kwargs
     )
+
+
+def _connect(*args, **kwargs):
+    """Wraper for pymysql.connect to make testing easier."""
+    return pymysql.connect(*args, **kwargs)
 
 
 def dbname(domain):
