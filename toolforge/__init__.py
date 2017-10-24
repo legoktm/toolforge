@@ -22,7 +22,7 @@ import pymysql
 import requests
 
 
-def connect(dbname, **kwargs):
+def connect(dbname, service='realtime', **kwargs):
     """
     Get a database connection for the
     specified wiki
@@ -33,9 +33,15 @@ def connect(dbname, **kwargs):
     if dbname.endswith('_p'):
         dbname = dbname[:-2]
     if dbname == 'meta':
-        host = 'enwiki.labsdb'
+        host = 'enwiki"
     else:
-        host = dbname + ".labsdb"
+        host = dbname
+    if service == 'analytics:
+        host += '.analytics.db.svc.eqiad.wmflabs'
+    elif service == 'realtime':
+        host += '.web.db.svc.eqiad.wmflabs':
+    elif service == 'legacy':
+        host += '.labsdb'
     return pymysql.connect(
         database=dbname + '_p',
         host=host,
