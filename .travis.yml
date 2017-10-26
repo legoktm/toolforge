@@ -4,13 +4,16 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
+sudo: false
+matrix:
+  fast_finish: true
 # command to install dependencies
-install: "pip install tox"
+install: pip install tox-travis
 # command to run tests
 script: tox
 notifications:
   email: false
-  irc: 
+  irc:
     channels:
       - "chat.freenode.net##legoktm"
     skip_join: true
