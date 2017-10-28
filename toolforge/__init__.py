@@ -51,15 +51,32 @@ def connect(dbname: str, cluster: str = 'web', **kwargs) -> pymysql.connections.
     return _connect(
         database=dbname + '_p',
         host=host,
-        read_default_file=os.path.expanduser("~/replica.my.cnf"),
-        charset='utf8mb4',
         **kwargs
     )
 
 
 def _connect(*args, **kwargs) -> pymysql.connections.Connection:
     """Wraper for pymysql.connect to make testing easier."""
-    return pymysql.connect(*args, **kwargs)
+    kw = {
+        'read_default_file': os.path.expanduser("~/replica.my.cnf"),
+        'charset': 'utf8mb4',
+    }
+    kw.update(kwargs)
+    return pymysql.connect(*args, **kw)
+
+
+def toolsdb(dbname, **kwargs):
+    """Connect to a database hosted on the toolsdb cluster.
+
+    :param dbname: Database name
+    :param kwargs: For pymysql.connect
+    :return: pymysql connection
+    """
+    return _connect(
+        database=dbname,
+        host='tools.db.svc.eqiad.wmflabs',
+        **kwargs
+    )
 
 
 def dbname(domain: str) -> str:
