@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import os
 import pytest
 import requests
 
@@ -53,17 +52,30 @@ class TestMain:
         }),
     ])
     def test_connect(self, mocker, args, expects):
-        common_expects = {
-            'read_default_file': os.path.expanduser("~/replica.my.cnf"),
-            'charset': 'utf8mb4',
-        }
+        self._assert_connect(mocker, toolforge.connect, args, expects)
 
+    def _assert_connect(self, mocker, func, args, expect):
+        """Mock toolforge._connect and assert it is called as expected.
+
+        :param func: Function to call after mocking toolforge._connect
+        :param args: Arguments for calling func
+        :param expect: Dict of expected arguments to toolforge._connect
+        """
         mm = mocker.patch('toolforge._connect')
         mm.return_value = None
-        exp = common_expects.copy()
-        exp.update(expects)
-
-        conn = toolforge.connect(*args)
-
+        conn = func(*args)
         assert conn is None
-        mm.assert_called_once_with(**exp)
+        mm.assert_called_once_with(**expect)
+
+    @pytest.mark.parametrize('args,expects', [
+        (['s12345__foo'], {
+            'database': 's12345__foo',
+            'host': 'tools.db.svc.eqiad.wmflabs',
+        }),
+        (['s12345__foo_p'], {
+            'database': 's12345__foo_p',
+            'host': 'tools.db.svc.eqiad.wmflabs',
+        }),
+    ])
+    def test_toolsdb(self, mocker, args, expects):
+        self._assert_connect(mocker, toolforge.toolsdb, args, expects)
