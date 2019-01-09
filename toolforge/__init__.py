@@ -101,6 +101,7 @@ def set_user_agent(tool, url=None, email=None):
     :param tool: Toolforge tool name
     :param url: Optional URL
     :param email: Optional email
+    :return New User-agent value
     """
     if url is None:
         url = 'https://tools.wmflabs.org/{}'.format(tool)
@@ -110,6 +111,7 @@ def set_user_agent(tool, url=None, email=None):
     requests_ua = requests.utils.default_user_agent()
     ua = '{} ({}; {}) {}'.format(tool, url, email, requests_ua)
     requests.utils.default_user_agent = lambda: ua
+    return ua
 
 
 def redirect_to_https():

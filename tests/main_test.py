@@ -28,11 +28,13 @@ class MainTest(unittest.TestCase):
     def test_set_user_agent(self):
         orig = requests.utils.default_user_agent
         requests.utils.default_user_agent = lambda: 'python-requests/2.13.0'
-        toolforge.set_user_agent('mycooltool')
+        expected = 'mycooltool (https://tools.wmflabs.org/mycooltool; ' +\
+                   'tools.mycooltool@tools.wmflabs.org) python-requests/2.13.0'
+        ret = toolforge.set_user_agent('mycooltool')
+        self.assertEqual(ret, expected)
         self.assertEqual(
             requests.get('https://httpbin.org/user-agent').json(),
-            {'user-agent': 'mycooltool (https://tools.wmflabs.org/mycooltool; '
-             'tools.mycooltool@tools.wmflabs.org) python-requests/2.13.0'}
+            {'user-agent': expected}
         )
         requests.utils.default_user_agent = orig
 
