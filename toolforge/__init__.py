@@ -20,9 +20,10 @@ import functools
 import os
 import pymysql
 import requests
+from typing import Optional
 
 
-def connect(dbname, cluster='web', **kwargs):
+def connect(dbname: str, cluster: str = 'web', **kwargs) -> pymysql.connections.Connection:
     """
     Get a database connection for the
     specified wiki
@@ -56,12 +57,12 @@ def connect(dbname, cluster='web', **kwargs):
     )
 
 
-def _connect(*args, **kwargs):
+def _connect(*args, **kwargs) -> pymysql.connections.Connection:
     """Wraper for pymysql.connect to make testing easier."""
     return pymysql.connect(*args, **kwargs)
 
 
-def dbname(domain):
+def dbname(domain: str) -> Optional[str]:
     """
     Convert a domain/URL into its database name
     """
@@ -82,6 +83,7 @@ def dbname(domain):
             for special in data[num]:
                 if special['url'] == domain:
                     return special['dbname']
+    return None
 
 
 @functools.lru_cache()
@@ -93,7 +95,7 @@ def _fetch_sitematrix():
     return r.json()
 
 
-def set_user_agent(tool, url=None, email=None):
+def set_user_agent(tool: str, url: Optional[str] = None, email: Optional[str] = None) -> str:
     """
     Set the default requests user-agent to a better
     one in accordance with
@@ -114,7 +116,7 @@ def set_user_agent(tool, url=None, email=None):
     return ua
 
 
-def redirect_to_https():
+def redirect_to_https() -> None:
     """
     Deprecated: All requests are now redirected to HTTPS by
     Toolforge itself.
