@@ -110,7 +110,7 @@ def set_user_agent(tool, url=None, email=None):
 
     requests_ua = requests.utils.default_user_agent()
     ua = '{} ({}; {}) {}'.format(tool, url, email, requests_ua)
-    requests.utils.default_user_agent = lambda: ua
+    requests.utils.default_user_agent = lambda *args, **kwargs: ua
     return ua
 
 
