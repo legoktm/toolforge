@@ -107,7 +107,7 @@ def dbname(domain: str) -> str:
 @functools.lru_cache()
 def _fetch_sitematrix():
     params = {'action': 'sitematrix', 'format': 'json'}
-    headers = {'User-agent': 'https://wikitech.wikimedia.org/wiki/User:Legoktm/wmflib'}
+    headers = {'User-agent': 'https://wikitech.wikimedia.org/wiki/User:Legoktm/toolforge_library'}
     r = requests.get('https://meta.wikimedia.org/w/api.php', params=params, headers=headers)
     r.raise_for_status()
     return r.json()
