@@ -62,7 +62,7 @@ def _connect(*args, **kwargs) -> pymysql.connections.Connection:
     return pymysql.connect(*args, **kwargs)
 
 
-def dbname(domain: str) -> Optional[str]:
+def dbname(domain: str) -> str:
     """
     Convert a domain/URL into its database name
     """
@@ -83,7 +83,8 @@ def dbname(domain: str) -> Optional[str]:
             for special in data[num]:
                 if special['url'] == domain:
                     return special['dbname']
-    return None
+
+    raise ValueError('Unable to find database name')
 
 
 @functools.lru_cache()
