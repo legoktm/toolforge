@@ -9,6 +9,10 @@ setup(
     author='Kunal Mehta',
     author_email='legoktm@member.fsf.org',
     description='Small library for common tasks on Wikimedia Toolforge',
-    install_requires=['requests', 'pymysql'],
+    install_requires=[
+        'requests',
+        'pymysql',
+        'typing;python_version<"3.5"'
+    ],
     test_suite="tests",
 )
