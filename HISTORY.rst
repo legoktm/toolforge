@@ -1,4 +1,4 @@
-4.3.0 (unreleased)
+4.3.0
 ------------------
 * Add type hints (Lucas Werkmeister)
 * Raise ValueError in toolforge.dbname() if it's not found
