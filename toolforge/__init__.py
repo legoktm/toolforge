@@ -65,7 +65,7 @@ def _connect(*args, **kwargs) -> pymysql.connections.Connection:
     return pymysql.connect(*args, **kw)
 
 
-def toolsdb(dbname, **kwargs):
+def toolsdb(dbname: str, **kwargs) -> pymysql.connections.Connection:
     """Connect to a database hosted on the toolsdb cluster.
 
     :param dbname: Database name
