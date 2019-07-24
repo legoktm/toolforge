@@ -15,5 +15,15 @@ setup(
         'pymysql',
         'typing;python_version<"3.5"'
     ],
+    python_requires='>=3.4',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
     test_suite="tests",
 )
