@@ -10,7 +10,7 @@ matrix:
 # command to install dependencies
 install: pip install tox-travis
 # command to run tests
-script: tox && tox -e flake8
+script: tox
 notifications:
   email: false
   irc:
