@@ -1,5 +1,10 @@
+4.3.1
+-----
+* Provide PEP 561 type information
+* Test against Python 3.8
+
 4.3.0
-------------------
+-----
 * Add type hints (Lucas Werkmeister)
 * Raise ValueError in toolforge.dbname() if it's not found
 * Make it easy to connect to tools.db.svc.eqiad.wmflabs (Bryan Davis)
