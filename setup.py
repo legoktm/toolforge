@@ -4,6 +4,7 @@ setup(
     name='toolforge',
     version='4.3.0',
     packages=['toolforge'],
+    package_data={'toolforge': ['py.typed']},
     url='https://wikitech.wikimedia.org/wiki/User:Legoktm/toolforge_library',
     license='GPL-3.0+',
     author='Kunal Mehta',
