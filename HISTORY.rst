@@ -1,3 +1,7 @@
+4.3.2
+-----
+* Update User-Agent for new toolforge.org domain
+
 4.3.1
 -----
 * Provide PEP 561 type information
