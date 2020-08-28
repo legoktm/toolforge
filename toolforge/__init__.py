@@ -124,7 +124,7 @@ def set_user_agent(tool: str, url: Optional[str] = None, email: Optional[str] = 
     :return New User-agent value
     """
     if url is None:
-        url = 'https://tools.wmflabs.org/{}'.format(tool)
+        url = 'https://{}.toolforge.org/'.format(tool)
     if email is None:
         email = 'tools.{}@tools.wmflabs.org'.format(tool)
 
