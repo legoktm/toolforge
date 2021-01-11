@@ -13,7 +13,8 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=[
         'requests',
-        'pymysql',
+        'pymysql<0.10;python_version<"3.5"',
+        'pymysql;python_version>="3.5"',
         'typing;python_version<"3.5"'
     ],
     python_requires='>=3.4',
