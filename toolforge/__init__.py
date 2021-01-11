@@ -128,8 +128,7 @@ def set_user_agent(tool: str, url: Optional[str] = None, email: Optional[str] = 
     if email is None:
         email = 'tools.{}@tools.wmflabs.org'.format(tool)
 
-    requests_ua = requests.utils.default_user_agent()
-    ua = '{} ({}; {}) {}'.format(tool, url, email, requests_ua)
+    ua = '{} ({}; {}) python-requests/{}'.format(tool, url, email, requests.__version__)
     requests.utils.default_user_agent = lambda *args, **kwargs: ua
     return ua
 
