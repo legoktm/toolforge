@@ -1,3 +1,9 @@
+4.4.0
+-----
+* Allow calling set_user_agent multiple times
+* Fix pymysql dependency on Python 3.4
+* Test against Python 3.9
+
 4.3.2
 -----
 * Update User-Agent for new toolforge.org domain
