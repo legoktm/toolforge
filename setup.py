@@ -14,7 +14,8 @@ setup(
     install_requires=[
         'requests',
         'pymysql<0.10;python_version<"3.5"',
-        'pymysql;python_version>="3.5"',
+        'pymysql<1.0;python_version=="3.5"',
+        'pymysql;python_version>="3.6"',
         'typing;python_version<"3.5"'
     ],
     python_requires='>=3.4',
