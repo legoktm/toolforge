@@ -32,12 +32,10 @@ def connect(dbname: str, cluster: str = 'web', **kwargs) -> pymysql.connections.
     :param kwargs: For pymysql.connect
     :return: pymysql connection
     """
-    assert cluster in ['analytics', 'labsdb', 'web']
+    if cluster not in ['analytics', 'web']:
+        raise ValueError('"cluster" must be one of: "analytics", "web"')
 
-    if cluster == 'labsdb':
-        domain = 'labsdb'
-    else:
-        domain = '{}.db.svc.eqiad.wmflabs'.format(cluster)
+    domain = '{}.db.svc.wikimedia.cloud'.format(cluster)
 
     if dbname.endswith('_p'):
         dbname = dbname[:-2]
@@ -131,11 +129,3 @@ def set_user_agent(tool: str, url: Optional[str] = None, email: Optional[str] = 
     ua = '{} ({}; {}) python-requests/{}'.format(tool, url, email, requests.__version__)
     requests.utils.default_user_agent = lambda *args, **kwargs: ua
     return ua
-
-
-def redirect_to_https() -> None:
-    """
-    Deprecated: All requests are now redirected to HTTPS by
-    Toolforge itself.
-    """
-    pass

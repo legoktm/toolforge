@@ -39,19 +39,15 @@ class TestMain:
     @pytest.mark.parametrize('args, expects', [
         (['enwiki_p'], {
             'database': 'enwiki_p',
-            'host': 'enwiki.web.db.svc.eqiad.wmflabs',
+            'host': 'enwiki.web.db.svc.wikimedia.cloud',
         }),
         (['enwiki'], {
             'database': 'enwiki_p',
-            'host': 'enwiki.web.db.svc.eqiad.wmflabs',
+            'host': 'enwiki.web.db.svc.wikimedia.cloud',
         }),
         (['enwiki', 'analytics'], {
             'database': 'enwiki_p',
-            'host': 'enwiki.analytics.db.svc.eqiad.wmflabs',
-        }),
-        (['enwiki_p', 'labsdb'], {
-            'database': 'enwiki_p',
-            'host': 'enwiki.labsdb',
+            'host': 'enwiki.analytics.db.svc.wikimedia.cloud',
         }),
     ])
     def test_connect(self, mocker, args, expects):

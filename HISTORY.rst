@@ -1,3 +1,8 @@
+5.0.0b1
+-------
+* [BREAKING] Switch to use new multi-instance Wiki Replicas
+* [BREAKING] Remove deprecated redirect_to_https
+
 4.4.0
 -----
 * Allow calling set_user_agent multiple times
