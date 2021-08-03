@@ -53,14 +53,14 @@ def connect(dbname: str, cluster: str = 'web', **kwargs) -> pymysql.connections.
     )
 
 
-def _connect(*args, **kwargs) -> pymysql.connections.Connection:
+def _connect(**kwargs) -> pymysql.connections.Connection:
     """Wraper for pymysql.connect to make testing easier."""
     kw = {
         'read_default_file': os.path.expanduser("~/replica.my.cnf"),
         'charset': 'utf8mb4',
     }
     kw.update(kwargs)
-    return pymysql.connect(*args, **kw)
+    return pymysql.connect(**kw)
 
 
 def toolsdb(dbname: str, **kwargs) -> pymysql.connections.Connection:
