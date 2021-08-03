@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='toolforge',
-    version='5.0.0b1',
+    version='5.0.0',
     packages=['toolforge'],
     package_data={'toolforge': ['py.typed']},
     url='https://wikitech.wikimedia.org/wiki/User:Legoktm/toolforge_library',

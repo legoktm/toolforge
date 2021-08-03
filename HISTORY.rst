@@ -1,3 +1,7 @@
+5.0.0
+-----
+* Fix pymysql dependency on Python 3.5 (AntiCompositeNumber)
+
 5.0.0b1
 -------
 * [BREAKING] Switch to use new multi-instance Wiki Replicas
