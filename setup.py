@@ -8,7 +8,7 @@ setup(
     url='https://wikitech.wikimedia.org/wiki/User:Legoktm/toolforge_library',
     license='GPL-3.0+',
     author='Kunal Mehta',
-    author_email='legoktm@member.fsf.org',
+    author_email='legoktm@debian.org',
     description='Small library for common tasks on Wikimedia Toolforge',
     long_description=open('README.rst').read(),
     install_requires=[
