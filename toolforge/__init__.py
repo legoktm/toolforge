@@ -60,7 +60,7 @@ def _connect(*args, **kwargs) -> pymysql.connections.Connection:
         'charset': 'utf8mb4',
     }
     kw.update(kwargs)
-    return pymysql.connect(*args, **kw)
+    return pymysql.connect(*args, **kw)  # type: ignore
 
 
 def toolsdb(dbname: str, **kwargs) -> pymysql.connections.Connection:
